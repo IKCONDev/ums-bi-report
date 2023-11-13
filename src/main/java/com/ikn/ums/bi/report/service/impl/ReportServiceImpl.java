@@ -3,18 +3,30 @@ package com.ikn.ums.bi.report.service.impl;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.scheduling.config.Task;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.ikn.ums.bi.report.model.Meeting;
+import com.ikn.ums.bi.report.model.Task;
 import com.ikn.ums.bi.report.service.ReportService;
 
 @Service
 public class ReportServiceImpl implements ReportService {
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	private String taskMicroserviceUrl = "http://UMS-MEETING-SERVICE/task";
 
 	@Override
 	public List<Task> getTasksList() {
-		return null;
+		ResponseEntity<List<Task>> taskListResponse = restTemplate.exchange(this.taskMicroserviceUrl+"/all", 
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {});
+		List<Task> taskList = taskListResponse.getBody();
+		return taskList;
 	}
 
 	@Override

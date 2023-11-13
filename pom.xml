@@ -59,6 +59,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -84,6 +89,9 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<image>
+						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
+					</image>
 				</configuration>
 			</plugin>
 		</plugins>

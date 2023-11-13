@@ -1,8 +1,11 @@
 package com.ikn.ums.bi.report.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,12 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ikn.ums.bi.report.model.Task;
+import com.ikn.ums.bi.report.service.ReportService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 @RequestMapping("/reports")
 public class ReportController {
+	
+	@Autowired
+	private ReportService reportService;
 
 //	By Department Critical/High Tasks
 //	Tasks Aging Report
@@ -29,9 +38,10 @@ public class ReportController {
 //	TaskAssigneeReport ---- Report assignee wise, select the assignee and list all the tasks he/she owns
 	
 	
-	@GetMapping("/reports/tasks/all")
+	@GetMapping("/tasks/all")
 	public ResponseEntity<?> getTasksList() {
-		return null;
+		List<Task> totalTaskList = reportService.getTasksList();
+		return new ResponseEntity<>(totalTaskList, HttpStatus.OK);
 		
 		
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
@@ -55,40 +65,40 @@ public class ReportController {
 //		}
 	}
 	
-	@GetMapping("/reports/tasks/dept")
+	@GetMapping("/tasks/dept")
 	public ResponseEntity<?> getTasksListByDepartment(@RequestParam(defaultValue = "" , required = false) String department) {
 		return null;
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
 
 	}
 
-	@GetMapping("/reports/tasks/owner")
+	@GetMapping("/tasks/owner")
 	public ResponseEntity<?> getTasksListByOwner(@RequestParam(defaultValue = "" , required = false) String taskOwner) {
 		return null;
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
 
 	}
 	
-	@GetMapping("/reports/tasks/severity")
+	@GetMapping("/tasks/severity")
 	public ResponseEntity<?> getTasksListBySeverity(@RequestParam(defaultValue = "" , required = false) String serverityLevel) {
 		return null;
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
 	}
 	
-	@GetMapping("/reports/tasks/status")
+	@GetMapping("/tasks/status")
 	public ResponseEntity<?> getTasksListByStatus(@RequestParam(defaultValue = "" , required = false) String taskStatus) {
 		return null;
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
 	}
 	
 	
-	@GetMapping("/reports/tasks/date")
+	@GetMapping("/tasks/date")
 	public ResponseEntity<?> getAgedTasksList(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 		return null;
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
 	}
 	
-	@GetMapping("/reports/meeting/participant")
+	@GetMapping("/meeting/participant")
 	public ResponseEntity<?> getParticipantTotalHoursSpentInMeetings(@RequestParam(defaultValue = "" , required = false) String participant) {
 		return null;
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
@@ -99,7 +109,7 @@ public class ReportController {
 	 * @param department: if value present, it gets the data for that department
 	 * @return
 	 */
-	@GetMapping("/reports/meeting/department")
+	@GetMapping("/meeting/department")
 	public ResponseEntity<?> getParticipantTotalHoursSpentInMeetingsByDepartment(@RequestParam(defaultValue = "" , required = false) String department) {
 		return null;
 		//TODO: Get all the tasks as objects and set in the list and give to front end.

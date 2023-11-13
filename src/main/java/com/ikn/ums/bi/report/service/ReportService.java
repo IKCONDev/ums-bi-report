@@ -2,10 +2,8 @@ package com.ikn.ums.bi.report.service;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import org.springframework.scheduling.config.Task;
-
 import com.ikn.ums.bi.report.model.Meeting;
+import com.ikn.ums.bi.report.model.Task;
 
 public interface ReportService {
 	
