@@ -3,10 +3,12 @@ package com.ikn.ums.bi.report.exception;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
+@Data
 @Component
-public class ReportsGlobalException extends RuntimeException{
+public class ReportsGlobalException extends RuntimeException {
 
 	/**
 	 * 
@@ -41,8 +43,10 @@ public class ReportsGlobalException extends RuntimeException{
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 	}
-	
+
 	public ReportsGlobalException() {
 		
 	}
+
+}
 
