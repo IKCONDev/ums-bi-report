@@ -8,7 +8,7 @@ import com.ikn.ums.bi.report.model.Task;
 public interface ReportService {
 	
 	public List<Task> getTasksList() ;
-	public List<Task> getTasksListByDepartment(String department);
+	public List<Task> getTasksListByDepartment(Long departmentId);
 	public List<Task> getTasksListByOwner(String taskOwner);
 	public List<Task> getTasksListBySeverity(String serverityLevel);
 	public List<Task> getTasksListByStatus(String taskStatus);

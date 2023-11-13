@@ -23,16 +23,20 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<Task> getTasksList() {
-		ResponseEntity<List<Task>> taskListResponse = restTemplate.exchange(this.taskMicroserviceUrl+"/all", 
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/all", 
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {});
-		List<Task> taskList = taskListResponse.getBody();
+		List<Task> taskList = response.getBody();
 		return taskList;
 	}
 
 	@Override
-	public List<Task> getTasksListByDepartment(String department) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Task> getTasksListByDepartment(Long departmentId) {
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/department/"+departmentId, HttpMethod.GET,
+				null, new ParameterizedTypeReference<List<Task>>() {
+		});
+		System.out.println(response.getBody());
+		List<Task> taskListByDepartment = response.getBody();
+		return taskListByDepartment;
 	}
 
 	@Override
