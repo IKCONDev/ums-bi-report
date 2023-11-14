@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,13 +25,17 @@ public class ReportServiceImpl implements ReportService {
 	private String taskMicroserviceUrl = "http://UMS-MEETING-SERVICE/task";
 
 	@Override
-	public List<Task> getTasksList() {
-		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/all", 
-				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {});
-		List<Task> taskList = response.getBody();
+	public List<Long> getTasksListCount(@DateTimeFormat(iso =ISO.DATE_TIME) LocalDateTime startDate,@DateTimeFormat(iso =ISO.DATE_TIME)  LocalDateTime endDate) {
+		System.out.println(startDate+"  "+"+++++++++");
+		String url = this.taskMicroserviceUrl + "/allForYear/" +startDate +"/"+ endDate;
+		ResponseEntity<List<Long>> response = restTemplate.exchange(url, 
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Long>>() {});
+		
+		List<Long> taskList = response.getBody();
+		System.out.println(taskList);
 		return taskList;
 	}
-
+	
 	@Override
 	public List<Task> getTasksListByDepartment(Long departmentId) {
 		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/department/"+departmentId, HttpMethod.GET,
@@ -87,5 +93,12 @@ public class ReportServiceImpl implements ReportService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+
+	
+	
+
+	
+	
 
 }

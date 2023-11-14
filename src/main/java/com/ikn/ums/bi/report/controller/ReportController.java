@@ -41,10 +41,11 @@ public class ReportController {
 //	Department Wise Report ---- All the tasks w.r.t department shall be pulled out
 //	TaskAssigneeReport ---- Report assignee wise, select the assignee and list all the tasks he/she owns
 	
-	
+
 	@GetMapping("/tasks/all")
-	public ResponseEntity<?> getTasksList() {
-		List<Task> totalTaskList = reportService.getTasksList();
+	public ResponseEntity<?> getTasksList(@RequestParam("startdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate ,
+			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+		List<Long> totalTaskList = reportService.getTasksListCount(startDate,endDate);
 		return new ResponseEntity<>(totalTaskList, HttpStatus.OK);
 		
 		
