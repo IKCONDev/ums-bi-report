@@ -1,10 +1,14 @@
 package com.ikn.ums.bi.report.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -98,10 +102,13 @@ public class ReportController {
 	}
 	
 	
-	@GetMapping("/tasks/date")
-	public ResponseEntity<?> getAgedTasksList(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+	@GetMapping("/tasks/aged")
+	public ResponseEntity<?> getAgedTasksList(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime) {
 		log.info("getAgedTasksList entered");
-		return null;
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
+		//LocalDateTime dateTimeNow = LocalDateTime.parse(dateTime.toString(),formatter);
+		List<Task> taskList = reportService.getAgedTasksList(dateTime);
+		return new ResponseEntity<>(taskList, HttpStatus.OK);
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
 	}
 	
@@ -123,29 +130,5 @@ public class ReportController {
 		return null;
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
 	}	
-	
-
-	
-//	
-//	
-//    @GetMapping("/reports/taskType}")
-//    public ResponseEntity<List<Report>> getReportsByType(@PathVariable String taskType) {
-//        List<Report> reports = reportService.getReportsByTaskType(taskType);
-//        return ResponseEntity.ok(reports);
-//    }
-//
-//    @GetMapping("/severity/{severity}")
-//    public ResponseEntity<List<Report>> getReportsBySeverity(@PathVariable String severity) {
-//        List<Report> reports = reportService.getReportsBySeverity(severity);
-//        return ResponseEntity.ok(reports);
-//    }
-//    
-//	
-//	@GetMapping("/aged/{date}")
-//    public ResponseEntity<List<Report>> getAgedReports(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-//        List<Report> reports = reportService.getAgedReports(date);
-//        return ResponseEntity.ok(reports);
-//    }
-//	
 	
 }

@@ -1,6 +1,7 @@
 package com.ikn.ums.bi.report.service.impl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +68,12 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<Task> getAgedTasksList(LocalDate date) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Task> getAgedTasksList(LocalDateTime dateTime) {
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/aged/"+dateTime.toString(), 
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {
+				});
+		List<Task> agedTaskList = response.getBody();
+		return agedTaskList;
 	}
 
 	@Override
