@@ -41,20 +41,29 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<Task> getTasksListByOwner(String taskOwner) {
-		// TODO Auto-generated method stub
-		return null;
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/assigned/"+taskOwner, 
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {
+				});
+		List<Task> taskListByOwner = response.getBody();
+		return taskListByOwner;
 	}
 
 	@Override
 	public List<Task> getTasksListBySeverity(String serverityLevel) {
-		// TODO Auto-generated method stub
-		return null;
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/priority/"+serverityLevel, 
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {
+				});
+		List<Task> taskListBySeverity = response.getBody();
+		return taskListBySeverity;
 	}
 
 	@Override
 	public List<Task> getTasksListByStatus(String taskStatus) {
-		// TODO Auto-generated method stub
-		return null;
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/status/"+taskStatus, 
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {
+				});
+		List<Task> taskListByStatus = response.getBody();
+		return taskListByStatus;
 	}
 
 	@Override
