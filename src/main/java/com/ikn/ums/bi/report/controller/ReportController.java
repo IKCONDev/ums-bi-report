@@ -139,9 +139,9 @@ public class ReportController {
 	 * @return
 	 */
 	@GetMapping("/meeting/organizer")
-	public ResponseEntity<?> getMeetingsByOrganizer(@RequestParam(defaultValue = "" , required = false) String organizerName) {
+	public ResponseEntity<?> getMeetingsByOrganizer(@RequestParam(defaultValue = "" , required = false) String organizer) {
 		log.info("getMeetingsByOrganizer entered");
-		List<Meeting> organizerMeetingList = reportService.getMeetingsByOrganizer(organizerName);
+		List<Meeting> organizerMeetingList = reportService.getMeetingsByOrganizer(organizer);
 		return new ResponseEntity<>(organizerMeetingList, HttpStatus.OK);
 	}	
 	

@@ -23,7 +23,7 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private RestTemplate restTemplate;
 	private String meetingMicroserviceTaskControllerURL = "http://UMS-MEETING-SERVICE/task";
-	private String meetingMicroserviceMeetingControllerURL = "http://UMS-MEETING-SERVICE/meeting";
+	private String meetingMicroserviceMeetingControllerURL = "http://UMS-MEETING-SERVICE/meetings";
 
 	@Override
 	public List<Long> getTasksListCount(@DateTimeFormat(iso =ISO.DATE_TIME) LocalDateTime startDate,@DateTimeFormat(iso =ISO.DATE_TIME)  LocalDateTime endDate) {
