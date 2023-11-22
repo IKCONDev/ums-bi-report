@@ -13,9 +13,10 @@ public interface ReportService {
 	public List<Task> getTasksListByOwner(String taskOwner);
 	public List<Task> getTasksListBySeverity(String serverityLevel);
 	public List<Task> getTasksListByStatus(String taskStatus);
-	public List<Task> getAgedTasksList(LocalDateTime dateTime);
-	public List<Meeting> getParticipantTotalHoursSpentInMeetings(String participant);
-	public List<Meeting> getParticipantTotalHoursSpentInMeetingsByDepartment(String department);
+	public List<Task> getAgedTasksList(LocalDate dateTime);
+	public List<Meeting> getMeetingsByOrganizer(String organizer);
+	public List<Meeting> getMeetingsByAttendee(String attendee);
+	public List<Meeting> getMeetingsByDepartment(Long departmentId);
 	public List<Long> getTasksListCount(LocalDateTime startDate, LocalDateTime endDate);
 
 }

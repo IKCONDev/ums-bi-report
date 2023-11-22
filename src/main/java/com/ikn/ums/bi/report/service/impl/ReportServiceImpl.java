@@ -22,12 +22,13 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private RestTemplate restTemplate;
-	private String taskMicroserviceUrl = "http://UMS-MEETING-SERVICE/task";
+	private String meetingMicroserviceTaskControllerURL = "http://UMS-MEETING-SERVICE/task";
+	private String meetingMicroserviceMeetingControllerURL = "http://UMS-MEETING-SERVICE/meeting";
 
 	@Override
 	public List<Long> getTasksListCount(@DateTimeFormat(iso =ISO.DATE_TIME) LocalDateTime startDate,@DateTimeFormat(iso =ISO.DATE_TIME)  LocalDateTime endDate) {
 		System.out.println(startDate+"  "+"+++++++++");
-		String url = this.taskMicroserviceUrl + "/allForYear/" +startDate +"/"+ endDate;
+		String url = this.meetingMicroserviceTaskControllerURL + "/allForYear/" +startDate +"/"+ endDate;
 		ResponseEntity<List<Long>> response = restTemplate.exchange(url, 
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<Long>>() {});
 		
@@ -38,7 +39,7 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Override
 	public List<Task> getTasksListByDepartment(Long departmentId) {
-		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/department/"+departmentId, HttpMethod.GET,
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.meetingMicroserviceTaskControllerURL+"/department/"+departmentId, HttpMethod.GET,
 				null, new ParameterizedTypeReference<List<Task>>() {
 		});
 		System.out.println(response.getBody());
@@ -48,7 +49,7 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<Task> getTasksListByOwner(String taskOwner) {
-		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/assigned/"+taskOwner, 
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.meetingMicroserviceTaskControllerURL+"/assigned/"+taskOwner, 
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {
 				});
 		List<Task> taskListByOwner = response.getBody();
@@ -57,7 +58,7 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<Task> getTasksListBySeverity(String serverityLevel) {
-		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/priority/"+serverityLevel, 
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.meetingMicroserviceTaskControllerURL+"/priority/"+serverityLevel, 
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {
 				});
 		List<Task> taskListBySeverity = response.getBody();
@@ -66,7 +67,7 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<Task> getTasksListByStatus(String taskStatus) {
-		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/status/"+taskStatus, 
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.meetingMicroserviceTaskControllerURL+"/status/"+taskStatus, 
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {
 				});
 		List<Task> taskListByStatus = response.getBody();
@@ -74,8 +75,8 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<Task> getAgedTasksList(LocalDateTime dateTime) {
-		ResponseEntity<List<Task>> response = restTemplate.exchange(this.taskMicroserviceUrl+"/aged/"+dateTime.toString(), 
+	public List<Task> getAgedTasksList(LocalDate date) {
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.meetingMicroserviceTaskControllerURL+"/aged/"+date.toString(), 
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {
 				});
 		List<Task> agedTaskList = response.getBody();
@@ -83,15 +84,30 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<Meeting> getParticipantTotalHoursSpentInMeetings(String participant) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Meeting> getMeetingsByOrganizer(String organizer) {
+		ResponseEntity<List<Meeting>> response = restTemplate.exchange(this.meetingMicroserviceMeetingControllerURL+"/organized/"+organizer, 
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Meeting>>() {
+				});
+		List<Meeting> organizerMeetingList = response.getBody();
+		return organizerMeetingList;
 	}
 
 	@Override
-	public List<Meeting> getParticipantTotalHoursSpentInMeetingsByDepartment(String department) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Meeting> getMeetingsByDepartment(Long departmentId) {
+		ResponseEntity<List<Meeting>> response = restTemplate.exchange(this.meetingMicroserviceMeetingControllerURL+"/department/"+departmentId, 
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Meeting>>() {
+				});
+		List<Meeting> meetingListOfDepartment = response.getBody();
+		return meetingListOfDepartment;
+	}
+
+	@Override
+	public List<Meeting> getMeetingsByAttendee(String attendee) {
+		ResponseEntity<List<Meeting>> response = restTemplate.exchange(this.meetingMicroserviceMeetingControllerURL+"/attended/"+attendee, 
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Meeting>>() {
+				});
+		List<Meeting> attendeeMeetingList = response.getBody();
+		return attendeeMeetingList;
 	}
 	
 

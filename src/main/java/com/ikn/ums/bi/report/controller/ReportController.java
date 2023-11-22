@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ikn.ums.bi.report.model.Meeting;
 import com.ikn.ums.bi.report.model.Task;
 import com.ikn.ums.bi.report.service.ReportService;
 
@@ -30,18 +31,12 @@ public class ReportController {
 	@Autowired
 	private ReportService reportService;
 
-//	By Department Critical/High Tasks
-//	Tasks Aging Report
-//	Tasks By Due Date
-//  General Reports
-	
-//	Master Tasks Report -- DONE
-//	Aging Tasks Report ----- given a date, since then the open tasks list to be displayed
-//	TasksReport ---- All the tasks shall be listed, and the Priority will be a drop down to play around
-//	Department Wise Report ---- All the tasks w.r.t department shall be pulled out
-//	TaskAssigneeReport ---- Report assignee wise, select the assignee and list all the tasks he/she owns
-	
-
+	/**
+	 * 
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
 	@GetMapping("/tasks/all")
 	public ResponseEntity<?> getTasksList(@RequestParam("startdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate ,
 			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
@@ -70,6 +65,11 @@ public class ReportController {
 //		}
 	}
 	
+	/**
+	 * 
+	 * @param departmentId
+	 * @return
+	 */
 	@GetMapping("/tasks/dept")
 	public ResponseEntity<?> getTasksListByDepartment(@RequestParam(defaultValue = "" , required = false) Long departmentId) {
 		log.info("getTasksListByDepartment entered");
@@ -77,6 +77,11 @@ public class ReportController {
 		return new ResponseEntity<>(taskList, HttpStatus.OK);
 	}
 
+	/**
+	 * 
+	 * @param taskOwner
+	 * @return
+	 */
 	@GetMapping("/tasks/owner")
 	public ResponseEntity<?> getTasksListByOwner(@RequestParam(defaultValue = "" , required = false) String taskOwner) {
 		log.info("getTasksListByOwner entered");
@@ -86,6 +91,11 @@ public class ReportController {
 
 	}
 	
+	/**
+	 * 
+	 * @param serverityLevel
+	 * @return
+	 */
 	@GetMapping("/tasks/severity")
 	public ResponseEntity<?> getTasksListBySeverity(@RequestParam(defaultValue = "" , required = false) String serverityLevel) {
 		log.info("getTasksListBySeverity entered");
@@ -94,6 +104,11 @@ public class ReportController {
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
 	}
 	
+	/**
+	 * 
+	 * @param taskStatus
+	 * @return
+	 */
 	@GetMapping("/tasks/status")
 	public ResponseEntity<?> getTasksListByStatus(@RequestParam(defaultValue = "" , required = false) String taskStatus) {
 		log.info("getTasksListByStatus entered");
@@ -103,33 +118,48 @@ public class ReportController {
 	}
 	
 	
+	/**
+	 * 
+	 * @param date
+	 * @return
+	 */
 	@GetMapping("/tasks/aged")
-	public ResponseEntity<?> getAgedTasksList(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime) {
+	public ResponseEntity<?> getAgedTasksList(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 		log.info("getAgedTasksList entered");
 		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
 		//LocalDateTime dateTimeNow = LocalDateTime.parse(dateTime.toString(),formatter);
-		List<Task> taskList = reportService.getAgedTasksList(dateTime);
+		List<Task> taskList = reportService.getAgedTasksList(date);
 		return new ResponseEntity<>(taskList, HttpStatus.OK);
 		//TODO: Get all the tasks as objects and set in the list and give to front end.
 	}
 	
-	@GetMapping("/meeting/participant")
-	public ResponseEntity<?> getParticipantTotalHoursSpentInMeetings(@RequestParam(defaultValue = "" , required = false) String participant) {
-		log.info("getTasksListByDepartment entered");
-		return null;
-		//TODO: Get all the tasks as objects and set in the list and give to front end.
+	/**
+	 * 
+	 * @param organizerName
+	 * @return
+	 */
+	@GetMapping("/meeting/organizer")
+	public ResponseEntity<?> getMeetingsByOrganizer(@RequestParam(defaultValue = "" , required = false) String organizerName) {
+		log.info("getMeetingsByOrganizer entered");
+		List<Meeting> organizerMeetingList = reportService.getMeetingsByOrganizer(organizerName);
+		return new ResponseEntity<>(organizerMeetingList, HttpStatus.OK);
 	}	
 	
 	/**
-	 * This method gets the Participants total hours spent by department wise.
 	 * @param department: if value present, it gets the data for that department
 	 * @return
 	 */
 	@GetMapping("/meeting/department")
-	public ResponseEntity<?> getParticipantTotalHoursSpentInMeetingsByDepartment(@RequestParam(defaultValue = "" , required = false) String department) {
-		log.info("getTasksListByDepartment entered");
-		return null;
-		//TODO: Get all the tasks as objects and set in the list and give to front end.
+	public ResponseEntity<?> getMeetingsByDepartment(@RequestParam(defaultValue = "" , required = false) Long departmentId) {
+		log.info("getMeetingsByDepartment entered");
+		List<Meeting> departmentMeetingList = reportService.getMeetingsByDepartment(departmentId);
+		return new ResponseEntity<>(departmentMeetingList, HttpStatus.OK);
 	}	
+	
+	public ResponseEntity<?> getMeetingsByAttendee(@RequestParam(required = true) String attendee){
+		log.info("getmeetingsByAttendee entered");
+		List<Meeting> attendedMeetingList = reportService.getMeetingsByAttendee(attendee);
+		return new ResponseEntity<>(attendedMeetingList, HttpStatus.OK);
+	}
 	
 }
