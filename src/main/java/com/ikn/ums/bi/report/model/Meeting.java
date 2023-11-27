@@ -26,6 +26,7 @@ public class Meeting {
 	private String onlineMeetingId;
 	private String onlineMeetingProvider;
 
+	private Long departmentId;
 	private String seriesMasterId;
 	private String joinUrl;
 //	private List<Transcript> meetingTranscripts;

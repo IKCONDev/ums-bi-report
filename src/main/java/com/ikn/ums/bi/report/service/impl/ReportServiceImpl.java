@@ -109,6 +109,19 @@ public class ReportServiceImpl implements ReportService {
 		List<Meeting> attendeeMeetingList = response.getBody();
 		return attendeeMeetingList;
 	}
+
+	@Override
+	public List<Meeting> getAllMeetings() {
+		// TODO Auto-generated method stub
+		ResponseEntity<List<Meeting>> response = restTemplate.exchange(
+	            this.meetingMicroserviceMeetingControllerURL+"/all", 
+	            HttpMethod.GET, 
+	            null, 
+	            new ParameterizedTypeReference<List<Meeting>>() {}
+	            );
+		List<Meeting> meetingList = response.getBody();
+		return meetingList;
+	}
 	
 
 	

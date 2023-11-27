@@ -18,5 +18,6 @@ public interface ReportService {
 	public List<Meeting> getMeetingsByAttendee(String attendee);
 	public List<Meeting> getMeetingsByDepartment(Long departmentId);
 	public List<Long> getTasksListCount(LocalDateTime startDate, LocalDateTime endDate);
+	public List<Meeting> getAllMeetings();
 
 }

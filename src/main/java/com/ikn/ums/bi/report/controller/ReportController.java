@@ -163,4 +163,10 @@ public class ReportController {
 		return new ResponseEntity<>(attendedMeetingList, HttpStatus.OK);
 	}
 	
+	@GetMapping("/meeting/all")
+	public ResponseEntity<?> getAllMeetings(){
+		log.info("getmeetingsByAttendee entered");
+		List<Meeting> attendedMeetingList = reportService.getAllMeetings();
+		return new ResponseEntity<>(attendedMeetingList, HttpStatus.OK);
+	}
 }
