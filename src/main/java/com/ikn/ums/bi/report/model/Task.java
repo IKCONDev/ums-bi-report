@@ -18,6 +18,7 @@ public class Task {
 	private String status;	
 	private Integer actionItemId;
 	private String emailId;
+	private Long departmentId;
 	private LocalDateTime createdDateTime;
 	private LocalDateTime modifiedDateTime;
 	private String createdBy;
