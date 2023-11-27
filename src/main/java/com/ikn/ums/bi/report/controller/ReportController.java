@@ -156,6 +156,7 @@ public class ReportController {
 		return new ResponseEntity<>(departmentMeetingList, HttpStatus.OK);
 	}	
 	
+	@GetMapping("/meeting/attendee")
 	public ResponseEntity<?> getMeetingsByAttendee(@RequestParam(required = true) String attendee){
 		log.info("getmeetingsByAttendee entered");
 		List<Meeting> attendedMeetingList = reportService.getMeetingsByAttendee(attendee);
