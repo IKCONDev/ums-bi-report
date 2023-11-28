@@ -3,6 +3,7 @@ package com.ikn.ums.bi.report.service.impl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -13,10 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.ikn.ums.bi.report.model.DepartmentMeetingCount;
 import com.ikn.ums.bi.report.model.Meeting;
 import com.ikn.ums.bi.report.model.Task;
 import com.ikn.ums.bi.report.service.ReportService;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class ReportServiceImpl implements ReportService {
 	
@@ -121,6 +125,22 @@ public class ReportServiceImpl implements ReportService {
 	            );
 		List<Meeting> meetingList = response.getBody();
 		return meetingList;
+	}
+
+	@Override
+	public List<Object[]> getAllDepartmentMettingsCount() {
+		// TODO Auto-generated method stub
+		log.info("getAllDepartmentMettingsCount() is entered");
+		log.info("getAllDepartmentMettingsCount() is under execution...");
+		ResponseEntity<List<Object[]>> response = restTemplate.exchange(
+	            this.meetingMicroserviceMeetingControllerURL+"/dept-count", 
+	            HttpMethod.GET, 
+	            null, 
+	            new ParameterizedTypeReference<List<Object[]>>() {}
+	            );
+		List<Object[]> meetingCount = response.getBody();
+		return meetingCount;
+		
 	}
 	
 

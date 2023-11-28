@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ikn.ums.bi.report.model.DepartmentMeetingCount;
 import com.ikn.ums.bi.report.model.Meeting;
 import com.ikn.ums.bi.report.model.Task;
 import com.ikn.ums.bi.report.service.ReportService;
@@ -165,8 +167,18 @@ public class ReportController {
 	
 	@GetMapping("/meeting/all")
 	public ResponseEntity<?> getAllMeetings(){
-		log.info("getmeetingsByAttendee entered");
+		log.info("getAllMeetings() is entered");
+		log.info("getAllMeetings() is under execution...");
 		List<Meeting> attendedMeetingList = reportService.getAllMeetings();
 		return new ResponseEntity<>(attendedMeetingList, HttpStatus.OK);
+	}
+	
+	@GetMapping("/meeting/count")
+	public ResponseEntity<?> getAllDepartmentsMeetingsCount(){
+		log.info("getAllDepartmentsMeetingsCount() is entered");
+		log.info("getAllDepartmentsMeetingsCount() is under execution...");
+		List<Object[]> DeptmeetingCount = reportService.getAllDepartmentMettingsCount();
+		System.out.println(DeptmeetingCount);
+		return new ResponseEntity<>(DeptmeetingCount, HttpStatus.OK);
 	}
 }

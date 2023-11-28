@@ -3,6 +3,9 @@ package com.ikn.ums.bi.report.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+
+import com.ikn.ums.bi.report.model.DepartmentMeetingCount;
 import com.ikn.ums.bi.report.model.Meeting;
 import com.ikn.ums.bi.report.model.Task;
 
@@ -19,5 +22,7 @@ public interface ReportService {
 	public List<Meeting> getMeetingsByDepartment(Long departmentId);
 	public List<Long> getTasksListCount(LocalDateTime startDate, LocalDateTime endDate);
 	public List<Meeting> getAllMeetings();
+	//public List<DepartmentMeetingCount> getAllDepartmentMettingsCount();
+	public List<Object[]> getAllDepartmentMettingsCount();
 
 }
