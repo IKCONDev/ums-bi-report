@@ -181,4 +181,14 @@ public class ReportController {
 		System.out.println(DeptmeetingCount);
 		return new ResponseEntity<>(DeptmeetingCount, HttpStatus.OK);
 	}
+	
+	@GetMapping("/task/department-task")
+	public ResponseEntity<?> getAllDepartmentsTasksCount(){
+		log.info("getAllDepartmentsMeetingsCount() is entered");
+		log.info("getAllDepartmentsMeetingsCount() is under execution...");
+		List<Object[]> DeptTasksCount = reportService.getAllDepartmentTasksCount();
+		System.out.println(DeptTasksCount);
+		return new ResponseEntity<>(DeptTasksCount, HttpStatus.OK);
+	}
+	
 }

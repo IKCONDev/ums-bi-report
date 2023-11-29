@@ -142,6 +142,21 @@ public class ReportServiceImpl implements ReportService {
 		return meetingCount;
 		
 	}
+
+	@Override
+	public List<Object[]> getAllDepartmentTasksCount() {
+		// TODO Auto-generated method stub
+		log.info("getAllDepartmentTasksCount() is entered");
+		log.info("getAllDepartmentTasksCount() is under execution...");
+		ResponseEntity<List<Object[]>> response = restTemplate.exchange(
+	            this.meetingMicroserviceTaskControllerURL+"/department-tasks", 
+	            HttpMethod.GET, 
+	            null, 
+	            new ParameterizedTypeReference<List<Object[]>>() {}
+	            );
+		List<Object[]> TasksCount = response.getBody();
+		return TasksCount;
+	}
 	
 
 	
