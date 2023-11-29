@@ -51,5 +51,13 @@ public class ActionItemReportController {
 		List<ActionItem> departmentActionItemList = actionItemReportServiceImpl.getActionItemsByPriority(priority);
 		return new ResponseEntity<>(departmentActionItemList, HttpStatus.OK);
 	}	
-
+    
+	@GetMapping("/department-actions")
+	public ResponseEntity<?> getAllDepartmentsAaactionItemsCount(){
+		log.info("getAllDepartmentsMeetingsCount() is entered");
+		log.info("getAllDepartmentsMeetingsCount() is under execution...");
+		List<Object[]> DeptActionItemsCount = actionItemReportServiceImpl.getAllDepartmentActionItemsCount();
+		System.out.println(DeptActionItemsCount);
+		return new ResponseEntity<>(DeptActionItemsCount, HttpStatus.OK);
+	}
 }

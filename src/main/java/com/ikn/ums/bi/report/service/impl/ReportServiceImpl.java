@@ -157,12 +157,5 @@ public class ReportServiceImpl implements ReportService {
 		List<Object[]> TasksCount = response.getBody();
 		return TasksCount;
 	}
-	
-
-	
-	
-
-	
-	
 
 }

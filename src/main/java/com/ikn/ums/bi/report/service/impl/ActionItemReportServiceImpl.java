@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 import com.ikn.ums.bi.report.model.ActionItem;
 import com.ikn.ums.bi.report.service.ActionItemReportService;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class ActionItemReportServiceImpl implements ActionItemReportService {
 
@@ -48,6 +50,20 @@ public class ActionItemReportServiceImpl implements ActionItemReportService {
 				});
 		List<ActionItem> actionItemListByPriority = response.getBody();
 		return actionItemListByPriority;
+	}
+	@Override
+	public List<Object[]> getAllDepartmentActionItemsCount() {
+		// TODO Auto-generated method stub
+		log.info("getAllDepartmentActionItemsCount() is entered");
+		log.info("getAllDepartmentActionItemsCount() is under execution...");
+		ResponseEntity<List<Object[]>> response = restTemplate.exchange(
+	            this.meetingMicroserviceActionItemControllerURL+"/department-actions", 
+	            HttpMethod.GET, 
+	            null, 
+	            new ParameterizedTypeReference<List<Object[]>>() {}
+	            );
+		List<Object[]> actionItemsCount = response.getBody();
+		return actionItemsCount;
 	}
 
 }

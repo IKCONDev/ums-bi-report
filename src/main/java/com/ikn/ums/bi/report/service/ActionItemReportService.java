@@ -9,5 +9,6 @@ public interface ActionItemReportService {
 	List<ActionItem> getActionItemsByOrganizer(String organizer);
 	List<ActionItem> getActionItemsByDepartment(Long departmentId);
 	List<ActionItem> getActionItemsByPriority(String priority);
+	public List<Object[]> getAllDepartmentActionItemsCount();
 
 }
