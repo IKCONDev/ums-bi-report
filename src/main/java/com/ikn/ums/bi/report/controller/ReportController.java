@@ -190,5 +190,22 @@ public class ReportController {
 		System.out.println(DeptTasksCount);
 		return new ResponseEntity<>(DeptTasksCount, HttpStatus.OK);
 	}
+	@GetMapping("/task/all-categorycount")
+	public ResponseEntity<?> getAllTaskCategoryCount(){
+		log.info("getAllTasks() is entered");
+		log.info("getAllTasks() is under execution...");
+		List<Object[]> TaskList = reportService.getAllDepartmentTasksCount();
+		log.info("getAllTasks() executed successfully");
+		return new ResponseEntity<>(TaskList, HttpStatus.OK);
+	}
+	@GetMapping("/task/category")
+	public ResponseEntity<?> getTaskByCategoryId(@RequestParam(defaultValue ="", required=true) Long taskCategoryId){
+		log.info("getTaskByCategoryId() is entered");
+		log.info("getTaskByCategoryId() is under execution...");
+		List<Task> taskList = reportService.getAllTasksByCategoryId(taskCategoryId);
+		log.info("getTaskByCategoryId() executed ");
+		return null;
+		
+	}
 	
 }

@@ -25,5 +25,7 @@ public interface ReportService {
 	//public List<DepartmentMeetingCount> getAllDepartmentMettingsCount();
 	public List<Object[]> getAllDepartmentMettingsCount();
 	public List<Object[]> getAllDepartmentTasksCount();
-	
+	//public List<Task> getAllTasksList();
+	public List<Object[]> getAllTaskCategoryCount();
+	public List<Task> getAllTasksByCategoryId(Long taskCategoryId);
 }

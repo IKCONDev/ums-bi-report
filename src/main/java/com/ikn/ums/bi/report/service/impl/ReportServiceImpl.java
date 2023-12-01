@@ -158,4 +158,27 @@ public class ReportServiceImpl implements ReportService {
 		return TasksCount;
 	}
 
+	@Override
+	public List<Object[]> getAllTaskCategoryCount() {
+		// TODO Auto-generated method stub
+		log.info("getAllTaskCategoryCount() is entered");
+		log.info("getAllTaskCategoryCount() is under execution...");
+		ResponseEntity<List<Object[]>> response = restTemplate.exchange(meetingMicroserviceTaskControllerURL+"/taskCategory-count",
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Object[]>>() {}
+		);
+		List<Object[]> tasksList = response.getBody();
+		return tasksList;
+	}
+	@Override
+	public List<Task> getAllTasksByCategoryId(Long taskCategoryId){
+		log.info("getAllTasksByCategoryId() is entered");
+		log.info("getAllTasksByCategoryId() is under execution...");
+		ResponseEntity<List<Task>> response = restTemplate.exchange(meetingMicroserviceTaskControllerURL+"/taskCategory/"+taskCategoryId,
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {}
+		);
+		List<Task> tasksList = response.getBody();
+		return tasksList;
+		
+	}
+
 }
