@@ -194,7 +194,7 @@ public class ReportController {
 	public ResponseEntity<?> getAllTaskCategoryCount(){
 		log.info("getAllTasks() is entered");
 		log.info("getAllTasks() is under execution...");
-		List<Object[]> TaskList = reportService.getAllDepartmentTasksCount();
+		List<Object[]> TaskList = reportService.getAllTaskCategoryCount();
 		log.info("getAllTasks() executed successfully");
 		return new ResponseEntity<>(TaskList, HttpStatus.OK);
 	}
@@ -203,8 +203,9 @@ public class ReportController {
 		log.info("getTaskByCategoryId() is entered");
 		log.info("getTaskByCategoryId() is under execution...");
 		List<Task> taskList = reportService.getAllTasksByCategoryId(taskCategoryId);
+		System.out.println(taskList);
 		log.info("getTaskByCategoryId() executed ");
-		return null;
+		return new ResponseEntity<>(taskList, HttpStatus.OK);
 		
 	}
 	
