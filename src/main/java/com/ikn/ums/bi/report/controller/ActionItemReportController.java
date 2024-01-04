@@ -24,7 +24,7 @@ public class ActionItemReportController {
 	private ActionItemReportService actionItemReportServiceImpl;
 	
 	@GetMapping("/organizer")
-	public ResponseEntity<?> getActionItemsReportByOrganizer(@RequestParam(required = true) String organizer) {
+	public ResponseEntity<List<ActionItem>> getActionItemsReportByOrganizer(@RequestParam(required = true) String organizer) {
 		log.info("getMeetingsByOrganizer entered");
 		List<ActionItem> organizerActionItemList = actionItemReportServiceImpl.getActionItemsByOrganizer(organizer);
 		return new ResponseEntity<>(organizerActionItemList, HttpStatus.OK);
@@ -35,7 +35,7 @@ public class ActionItemReportController {
 	 * @return
 	 */
 	@GetMapping("/department")
-	public ResponseEntity<?> getActionItemsReportByDepartment(@RequestParam(required = true) Long departmentId) {
+	public ResponseEntity<List<ActionItem>> getActionItemsReportByDepartment(@RequestParam(required = true) Long departmentId) {
 		log.info("getMeetingsByDepartment entered");
 		List<ActionItem> departmentActionItemList = actionItemReportServiceImpl.getActionItemsByDepartment(departmentId);
 		return new ResponseEntity<>(departmentActionItemList, HttpStatus.OK);
@@ -46,14 +46,14 @@ public class ActionItemReportController {
 	 * @return
 	 */
 	@GetMapping("/priority")
-	public ResponseEntity<?> getActionItemsReportByPriority(@RequestParam(required = true) String priority) {
+	public ResponseEntity<List<ActionItem>> getActionItemsReportByPriority(@RequestParam(required = true) String priority) {
 		log.info("getMeetingsByDepartment entered");
 		List<ActionItem> departmentActionItemList = actionItemReportServiceImpl.getActionItemsByPriority(priority);
 		return new ResponseEntity<>(departmentActionItemList, HttpStatus.OK);
 	}	
     
 	@GetMapping("/department-actions")
-	public ResponseEntity<?> getAllDepartmentsAaactionItemsCount(){
+	public ResponseEntity<List<Object[]>> getAllDepartmentsAaactionItemsCount(){
 		log.info("getAllDepartmentsMeetingsCount() is entered");
 		log.info("getAllDepartmentsMeetingsCount() is under execution...");
 		List<Object[]> DeptActionItemsCount = actionItemReportServiceImpl.getAllDepartmentActionItemsCount();

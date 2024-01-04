@@ -40,7 +40,7 @@ public class ReportController {
 	 * @return
 	 */
 	@GetMapping("/tasks/all")
-	public ResponseEntity<?> getTasksList(@RequestParam("startdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate ,
+	public ResponseEntity<List<Long>> getTasksList(@RequestParam("startdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate ,
 			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
 		List<Long> totalTaskList = reportService.getTasksListCount(startDate,endDate);
 		return new ResponseEntity<>(totalTaskList, HttpStatus.OK);
@@ -73,7 +73,7 @@ public class ReportController {
 	 * @return
 	 */
 	@GetMapping("/tasks/dept")
-	public ResponseEntity<?> getTasksListByDepartment(@RequestParam(defaultValue = "" , required = false) Long departmentId) {
+	public ResponseEntity<List<Task>> getTasksListByDepartment(@RequestParam(defaultValue = "" , required = false) Long departmentId) {
 		log.info("getTasksListByDepartment entered");
 		List<Task> taskList = reportService.getTasksListByDepartment(departmentId);
 		return new ResponseEntity<>(taskList, HttpStatus.OK);
@@ -85,7 +85,7 @@ public class ReportController {
 	 * @return
 	 */
 	@GetMapping("/tasks/owner")
-	public ResponseEntity<?> getTasksListByOwner(@RequestParam(defaultValue = "" , required = false) String taskOwner) {
+	public ResponseEntity<List<Task>> getTasksListByOwner(@RequestParam(defaultValue = "" , required = false) String taskOwner) {
 		log.info("getTasksListByOwner entered");
 		List<Task> taskList = reportService.getTasksListByOwner(taskOwner);
 		return new ResponseEntity<>(taskList, HttpStatus.OK);
@@ -99,7 +99,7 @@ public class ReportController {
 	 * @return
 	 */
 	@GetMapping("/tasks/severity")
-	public ResponseEntity<?> getTasksListBySeverity(@RequestParam(defaultValue = "" , required = false) String serverityLevel) {
+	public ResponseEntity<List<Task>> getTasksListBySeverity(@RequestParam(defaultValue = "" , required = false) String serverityLevel) {
 		log.info("getTasksListBySeverity entered");
 		List<Task> taskList = reportService.getTasksListBySeverity(serverityLevel);
 		return new ResponseEntity<>(taskList, HttpStatus.OK);
@@ -112,7 +112,7 @@ public class ReportController {
 	 * @return
 	 */
 	@GetMapping("/tasks/status")
-	public ResponseEntity<?> getTasksListByStatus(@RequestParam(defaultValue = "" , required = false) String taskStatus) {
+	public ResponseEntity<List<Task>> getTasksListByStatus(@RequestParam(defaultValue = "" , required = false) String taskStatus) {
 		log.info("getTasksListByStatus entered");
 		List<Task> taskList = reportService.getTasksListByStatus(taskStatus);
 		return new ResponseEntity<>(taskList, HttpStatus.OK);
@@ -126,7 +126,7 @@ public class ReportController {
 	 * @return
 	 */
 	@GetMapping("/tasks/aged")
-	public ResponseEntity<?> getAgedTasksList(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+	public ResponseEntity<List<Task>> getAgedTasksList(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 		log.info("getAgedTasksList entered");
 		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
 		//LocalDateTime dateTimeNow = LocalDateTime.parse(dateTime.toString(),formatter);
@@ -141,7 +141,7 @@ public class ReportController {
 	 * @return
 	 */
 	@GetMapping("/meeting/organizer")
-	public ResponseEntity<?> getMeetingsByOrganizer(@RequestParam(defaultValue = "" , required = false) String organizer) {
+	public ResponseEntity<List<Meeting>> getMeetingsByOrganizer(@RequestParam(defaultValue = "" , required = false) String organizer) {
 		log.info("getMeetingsByOrganizer entered");
 		List<Meeting> organizerMeetingList = reportService.getMeetingsByOrganizer(organizer);
 		return new ResponseEntity<>(organizerMeetingList, HttpStatus.OK);
@@ -152,21 +152,21 @@ public class ReportController {
 	 * @return
 	 */
 	@GetMapping("/meeting/department")
-	public ResponseEntity<?> getMeetingsByDepartment(@RequestParam(defaultValue = "" , required = false) Long departmentId) {
+	public ResponseEntity<List<Meeting>> getMeetingsByDepartment(@RequestParam(defaultValue = "" , required = false) Long departmentId) {
 		log.info("getMeetingsByDepartment entered");
 		List<Meeting> departmentMeetingList = reportService.getMeetingsByDepartment(departmentId);
 		return new ResponseEntity<>(departmentMeetingList, HttpStatus.OK);
 	}	
 	
 	@GetMapping("/meeting/attendee")
-	public ResponseEntity<?> getMeetingsByAttendee(@RequestParam(required = true) String attendee){
+	public ResponseEntity<List<Meeting>> getMeetingsByAttendee(@RequestParam(required = true) String attendee){
 		log.info("getmeetingsByAttendee entered");
 		List<Meeting> attendedMeetingList = reportService.getMeetingsByAttendee(attendee);
 		return new ResponseEntity<>(attendedMeetingList, HttpStatus.OK);
 	}
 	
 	@GetMapping("/meeting/all")
-	public ResponseEntity<?> getAllMeetings(){
+	public ResponseEntity<List<Meeting>> getAllMeetings(){
 		log.info("getAllMeetings() is entered");
 		log.info("getAllMeetings() is under execution...");
 		List<Meeting> attendedMeetingList = reportService.getAllMeetings();
@@ -174,7 +174,7 @@ public class ReportController {
 	}
 	
 	@GetMapping("/meeting/count")
-	public ResponseEntity<?> getAllDepartmentsMeetingsCount(){
+	public ResponseEntity<List<Object[]>> getAllDepartmentsMeetingsCount(){
 		log.info("getAllDepartmentsMeetingsCount() is entered");
 		log.info("getAllDepartmentsMeetingsCount() is under execution...");
 		List<Object[]> DeptmeetingCount = reportService.getAllDepartmentMettingsCount();
@@ -183,7 +183,7 @@ public class ReportController {
 	}
 	
 	@GetMapping("/task/department-task")
-	public ResponseEntity<?> getAllDepartmentsTasksCount(){
+	public ResponseEntity<List<Object[]>> getAllDepartmentsTasksCount(){
 		log.info("getAllDepartmentsMeetingsCount() is entered");
 		log.info("getAllDepartmentsMeetingsCount() is under execution...");
 		List<Object[]> DeptTasksCount = reportService.getAllDepartmentTasksCount();
@@ -191,7 +191,7 @@ public class ReportController {
 		return new ResponseEntity<>(DeptTasksCount, HttpStatus.OK);
 	}
 	@GetMapping("/task/all-categorycount")
-	public ResponseEntity<?> getAllTaskCategoryCount(){
+	public ResponseEntity<List<Object[]>> getAllTaskCategoryCount(){
 		log.info("getAllTasks() is entered");
 		log.info("getAllTasks() is under execution...");
 		List<Object[]> TaskList = reportService.getAllTaskCategoryCount();
@@ -199,7 +199,7 @@ public class ReportController {
 		return new ResponseEntity<>(TaskList, HttpStatus.OK);
 	}
 	@GetMapping("/task/category")
-	public ResponseEntity<?> getTaskByCategoryId(@RequestParam(defaultValue ="", required=true) Long taskCategoryId){
+	public ResponseEntity<List<Task>> getTaskByCategoryId(@RequestParam(defaultValue ="", required=true) Long taskCategoryId){
 		log.info("getTaskByCategoryId() is entered");
 		log.info("getTaskByCategoryId() is under execution...");
 		List<Task> taskList = reportService.getAllTasksByCategoryId(taskCategoryId);
