@@ -9,7 +9,44 @@ public class ErrorCodeMessages {
 	 
 	 public static final String ERR_REPORT_ENTITY_IS_NULL_CODE = "REPORT-ENTITY-IS-NULL-1002";
 	 public static final String ERR_REPORT_ENTITY_IS_NULL_MSG = "Report Entity is Null."; 
+	 
+	 public static final String ERR_REPORT_ACTIONITEM_LIST_ENTITY_IS_NULL_CODE = "ERR_REPORT_ACTIONITEM_ENTITY_IS_NULL_CODE-1003";
+	 public static final String ERR_REPORT_ACTIONITEM_LIST_ENTITY_IS_NULL_MSG = "Action Item Entity is Null"; 
+	 
+	 public static final String ERR_REPORT_TASK_LIST_ENTITY_IS_NULL_CODE = "ERR_REPORT_ACTIONITEM_ENTITY_IS_NULL_CODE-1004";
+	 public static final String ERR_REPORT_TASK_LIST_ENTITY_IS_NULL_MSG = "Task Entity is Null"; 
+	 
+	 public static final String ERR_REPORT_DEPARTMENTID_IS_NULL_CODE = "ERR_REPORT_DEPARTMENTID_IS_NULL_CODE-1005";
+	 public static final String ERR_REPORT_DEPARTMENTID_IS_NULL_MSG = "Department ID is Null"; 
+	 
+	 
+	 public static final String ERR_REPORT_EMAILID_IS_NULL_CODE = "ERR_REPORT_EMAILID_IS_NULL_CODE-1006";
+	 public static final String ERR_REPORT_EMAILID_IS_NULL_MSG = "Email ID is Null";
 
+	 public static final String ERR_REPORT_PRIORITY_IS_NULL_CODE = "ERR_REPORT_PRIORITY_IS_NULL_CODE-1007";
+	 public static final String ERR_REPORT_PRIORITY_IS_NULL_MSG = "Priority is Null";
+	 
+	 public static final String ERR_REPORT_DRPARTMENT_COUNT_IS_NULL_CODE = "ERR_REPORT_DRPARTMENT_COUNT_IS_NULL_CODE-1008";
+	 public static final String ERR_REPORT_DRPARTMENT_COUNT_IS_NULL_MSG = "Department Count is Null";
+	 
+	 public static final String ERR_REPORT_DATE_IS_NULL_CODE = "ERR_REPORT_DATE_IS_NULL_CODE-1009";
+	 public static final String ERR_REPORT_DATE_IS_NULL_MSG = "Date is Null";
+	 
+	 public static final String ERR_REPORT_SEVERITY_IS_NULL_CODE = "ERR_REPORT_PRIORITY_IS_NULL_CODE-1010";
+	 public static final String ERR_REPORT_SEVERITY_IS_NULL_MSG = "Severity is Null";
+	 
+	 public static final String ERR_REPORT_TASKOWNER_IS_NULL_CODE = "ERR_REPORT_TASKOWNER_IS_NULL_CODE-1011";
+	 public static final String ERR_REPORT_TASKOWNER_IS_NULL_MSG = "task owner is Null";
+	 
+	 public static final String ERR_REPORT_STATUS_IS_NULL_CODE = "ERR_REPORT_STATUS_IS_NULL_CODE-1012";
+	 public static final String ERR_REPORT_STATUS_IS_NULL_MSG = "status is Null";
+	 
+	 public static final String ERR_REPORT_MEETINGS_LIST_ENTITY_IS_NULL_CODE = "ERR_REPORT_MEETINGS_LIST_ENTITY_IS_NULL_CODE-1013";
+	 public static final String ERR_REPORT_MEETINGS_LIST_ENTITY_IS_NULL_MSG = "Meeting List Entity is Null"; 
+	 
+	 public static final String ERR_REPORT_TASKCATEGORY_ID_IS_NULL_CODE = "ERR_REPORT_TASKCATEGORY_ID_IS_NULL_CODE-1014";
+	 public static final String ERR_REPORT_TASKCATEGORY_ID_IS_NULL_MSG = "Email ID is Null";
+	 
 //REPORT TASKS MODULE ERROR CODES
 
 

@@ -75,4 +75,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		log.info("GlobalExceptionHandler.handleEmptyInput() ENTERED " + ex.getMessage());
 		return new ResponseEntity<Object>("Please change your http method type.", HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(EmptyInputException.class)
+	public ResponseEntity<String> handleEmptyInputException(EmptyInputException emptyInputException) {
+		log.info("GlobalExceptionHandler.handleNoSuchElementException() ENTERED" + emptyInputException.getMessage());
+		return new ResponseEntity<String>("Input field is empty. Please look into it.", HttpStatus.BAD_REQUEST);
+	}
+
 }

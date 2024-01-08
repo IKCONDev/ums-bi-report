@@ -27,7 +27,6 @@ public class TaskCategoryReportController {
 	@GetMapping("/tasksCategoryReport/all")
 	public ResponseEntity<?> getAllTaskCategoryReportList() {
 		
-		
 		return null;
 		
 		
