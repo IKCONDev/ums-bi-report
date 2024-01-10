@@ -40,10 +40,13 @@ public class ActionItemReportController {
 			List<ActionItem> organizerActionItemList = actionItemReportServiceImpl.getActionItemsByOrganizer(organizer);
 			log.info("getMeetingsByOrganizer() executed successfully");
 			return new ResponseEntity<>(organizerActionItemList, HttpStatus.OK);
-		}catch (Exception e) {
+		}catch (EmptyListException businessException) {
+			throw businessException;
+		}
+		catch (Exception e) {
 			log.error("getActionItemsReportByOrganizer() An exception occured while fectching the action Items of an organizer"+ e.getMessage());
-			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_ACTIONITEM_LIST_ENTITY_IS_NULL_CODE,
-					ErrorCodeMessages.ERR_REPORT_ACTIONITEM_LIST_ENTITY_IS_NULL_MSG);
+			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_CODE,
+					     ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_MSG);
 		}
 		
 	}	
@@ -65,10 +68,13 @@ public class ActionItemReportController {
 			List<ActionItem> departmentActionItemList = actionItemReportServiceImpl.getActionItemsByDepartment(departmentId);
 			log.info("getActionItemsReportByDepartment() executed successfully");
 			return new ResponseEntity<>(departmentActionItemList, HttpStatus.OK);
-		}catch (Exception e) {
+		}catch (EmptyListException businessException) {
+			throw businessException;
+		}
+		catch (Exception e) {
 			log.error("getActionItemsReportByDepartment() is exited with Exception "+ e.getMessage());
-			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_ACTIONITEM_LIST_ENTITY_IS_NULL_CODE,
-					ErrorCodeMessages.ERR_REPORT_ACTIONITEM_LIST_ENTITY_IS_NULL_MSG);
+			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_CODE,
+				     ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_MSG);
 		}
 	}	
 	
@@ -89,10 +95,13 @@ public class ActionItemReportController {
 			List<ActionItem> departmentActionItemList = actionItemReportServiceImpl.getActionItemsByPriority(priority);
 			log.info("getMeetingsByDepartment executed successfully");
 			return new ResponseEntity<>(departmentActionItemList, HttpStatus.OK);
-		}catch(Exception e) {
+		}catch (EmptyListException businessException) {
+			throw businessException;
+		}
+		catch(Exception e) {
 			log.error("An exception occured while fetching the action Items based on priority"+ e.getMessage());
-			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_ACTIONITEM_LIST_ENTITY_IS_NULL_CODE,
-					ErrorCodeMessages.ERR_REPORT_ACTIONITEM_LIST_ENTITY_IS_NULL_MSG);
+			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_CODE,
+				     ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_MSG);
 			
 		}
 		

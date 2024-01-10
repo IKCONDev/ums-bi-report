@@ -47,6 +47,16 @@ public class ErrorCodeMessages {
 	 public static final String ERR_REPORT_TASKCATEGORY_ID_IS_NULL_CODE = "ERR_REPORT_TASKCATEGORY_ID_IS_NULL_CODE-1014";
 	 public static final String ERR_REPORT_TASKCATEGORY_ID_IS_NULL_MSG = "Email ID is Null";
 	 
+	 
+	 public static final String ERR_REPORT_GET_MEETINGS_UNSUCCESS_CODE = "ERR_GET_MEETINGS_UNSUCCESS_CODE-1009";
+	 public static final String ERR_REPORT_GET_MEETINGS_UNSUCCESS_MSG = "Exception occured while fetching meetings";
+	 
+     public static final String ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_CODE = "ERR_GET_ACTIONITEMS_UNSUCCESS_CODE-1009";
+     public static final String ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_MSG = "Exception occured while fetching actionItems";
+ 
+     public static final String ERR_REPORT_GET_TASKS_UNSUCCESS_CODE = "ERR_GET_TASKS_UNSUCCESS_CODE-1009";
+     public static final String ERR_REPORT_GET_TASKS_UNSUCCESS_MSG = "Exception occured while fetching Tasks";
+	 
 //REPORT TASKS MODULE ERROR CODES
 
 
@@ -59,10 +69,7 @@ public class ErrorCodeMessages {
 //	 
 //	 public static final String ERR_ROLE_SERVICE_EXCEPTION_CODE = "ROLE_SERVICE_EXCEPTION_CODE-1007";
 //	 public static final String ERR_ROLE_SERVICE_EXCEPTION_MSG = "Exception Occured in the Role Service Layer."; 
-//	 
-//	 public static final String ERR_ROLE_CREATE_UNSUCCESS_CODE = "ROLE_CREATE_UNSUCCESS_CODE-1009";
-//	 public static final String ERR_ROLE_CREATE_UNSUCCESS_MSG = "Exception occured while creating role";
-//	 
+	 
 //	 public static final String ERR_ROLE_DELETE_UNSUCCESS_CODE = "ROLE_DELETE_UNSUCCESS_CODE-1010";
 //	 public static final String ERR_ROLE_DELETE_UNSUCCESS_MSG = "Exception occured while deleting role";
 //	 
