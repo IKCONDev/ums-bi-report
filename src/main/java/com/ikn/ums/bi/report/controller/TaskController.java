@@ -38,18 +38,18 @@ public class TaskController {
 	@GetMapping("/tasks/all")
 	public ResponseEntity<List<Long>> getTasksList(@RequestParam("startdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate ,
 			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
-		log.info("getAllDepartmentsMeetingsCount() is entered with args :");
+		log.info("getTasksList() is entered with args :");
 		if(startDate == null || endDate == null) {
 		  throw new EmptyInputException(ErrorCodeMessages.ERR_REPORT_DATE_IS_NULL_CODE,
 				  ErrorCodeMessages.ERR_REPORT_DATE_IS_NULL_MSG);	
 		}
 		try {
-			log.info("getAllDepartmentsMeetingsCount() is under execution...");
+			log.info("getTasksList() is under execution...");
 			List<Long> totalTaskList = reportService.getTasksListCount(startDate,endDate);
-			log.info("getAllDepartmentsMeetingsCount() executed successfully");
+			log.info("getTasksList() executed successfully");
 			return new ResponseEntity<>(totalTaskList, HttpStatus.OK);
 		}catch (Exception e) {
-		   log.error("getAllDepartmentsMeetingsCount() is exited with an exception "+ e.getMessage());
+		   log.error("getTasksList() is exited with an exception "+ e.getMessage(), e);
 		   throw new ControllerException(ErrorCodeMessages.ERR_REPORT_GET_TASKS_UNSUCCESS_CODE,
 				   ErrorCodeMessages.ERR_REPORT_GET_TASKS_UNSUCCESS_MSG);
 		}

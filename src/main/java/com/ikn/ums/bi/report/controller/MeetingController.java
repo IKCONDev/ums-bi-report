@@ -124,7 +124,7 @@ public class MeetingController {
     		log.info("getAllDepartmentsMeetingsCount() executed successfully");
     		return new ResponseEntity<>(DeptmeetingCount, HttpStatus.OK);
 		}catch(Exception e) {
-			log.error("getAllMeetings() exited with exception:"+ e.getMessage(), e);
+			log.error("getAllDepartmentsMeetingsCount() exited with exception:"+ e.getMessage(), e);
 			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_DRPARTMENT_COUNT_IS_NULL_CODE,
 					ErrorCodeMessages.ERR_REPORT_DRPARTMENT_COUNT_IS_NULL_MSG);
 		}

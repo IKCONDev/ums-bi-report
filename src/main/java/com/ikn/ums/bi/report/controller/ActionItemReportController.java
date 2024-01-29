@@ -29,18 +29,19 @@ public class ActionItemReportController {
 	
 	@GetMapping("/organizer")
 	public ResponseEntity<List<ActionItem>> getActionItemsReportByOrganizer(@RequestParam(required = true) String organizer) {
-		log.info("getMeetingsByOrganizer() is entered with args: OrganizerName - "+ organizer);
+		log.info("getActionItemsReportByOrganizer() is entered with args: OrganizerName - "+ organizer);
 		if(organizer == null || organizer == "") {
 			log.info("getActionItemsReportByOrganizer() Organizer value is empty"+ organizer);
 			throw new EmptyInputException(ErrorCodeMessages.ERR_REPORT_EMAILID_IS_NULL_CODE,
 					ErrorCodeMessages.ERR_REPORT_EMAILID_IS_NULL_MSG);
 		}
 		try {
-			log.info("getMeetingsByOrganizer() is under execution...");
+			log.info("getActionItemsReportByOrganizer() is under execution...");
 			List<ActionItem> organizerActionItemList = actionItemReportServiceImpl.getActionItemsByOrganizer(organizer);
-			log.info("getMeetingsByOrganizer() executed successfully");
+			log.info("getActionItemsReportByOrganizer() executed successfully");
 			return new ResponseEntity<>(organizerActionItemList, HttpStatus.OK);
 		}catch (EmptyListException businessException) {
+			log.error("getActionItemsReportByOrganizer() An exception occured while fectching the action Items of an organizer"+ businessException.getMessage());
 			throw businessException;
 		}
 		catch (Exception e) {
@@ -57,7 +58,7 @@ public class ActionItemReportController {
 	 */
 	@GetMapping("/department")
 	public ResponseEntity<List<ActionItem>> getActionItemsReportByDepartment(@RequestParam(required = true) Long departmentId) {
-		log.info("getMeetingsByDepartment() is entered with args: departmentId - "+ departmentId);
+		log.info("getActionItemsReportByDepartment() is entered with args: departmentId - "+ departmentId);
 		if(departmentId <= 0 || departmentId == null) {
 			log.info("getActionItemsReportByDepartment() EmptyInputException"+ departmentId);
 			throw new EmptyInputException(ErrorCodeMessages.ERR_REPORT_DEPARTMENTID_IS_NULL_CODE,
@@ -69,10 +70,11 @@ public class ActionItemReportController {
 			log.info("getActionItemsReportByDepartment() executed successfully");
 			return new ResponseEntity<>(departmentActionItemList, HttpStatus.OK);
 		}catch (EmptyListException businessException) {
+			log.error("getActionItemsReportByDepartment() is exited with Exception "+ businessException.getMessage(), businessException);
 			throw businessException;
 		}
 		catch (Exception e) {
-			log.error("getActionItemsReportByDepartment() is exited with Exception "+ e.getMessage());
+			log.error("getActionItemsReportByDepartment() is exited with Exception "+ e.getMessage(), e);
 			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_CODE,
 				     ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_MSG);
 		}
@@ -84,22 +86,23 @@ public class ActionItemReportController {
 	 */
 	@GetMapping("/priority")
 	public ResponseEntity<List<ActionItem>> getActionItemsReportByPriority(@RequestParam(required = true) String priority) {
-		log.info("getMeetingsByDepartment is entered with args: priority");
+		log.info("getActionItemsReportByPriority() is entered with args: priority");
 		if(priority == null || priority == "") {
 			log.info("getActionItemsReportByPriority() EmptyInputException: "+ priority);
 			throw new EmptyInputException(ErrorCodeMessages.ERR_REPORT_PRIORITY_IS_NULL_CODE,
 					ErrorCodeMessages.ERR_REPORT_PRIORITY_IS_NULL_MSG);
 		}
 		try {
-			log.info("getMeetingsByDepartment is under executiom...");
+			log.info("getActionItemsReportByPriority() is under executiom...");
 			List<ActionItem> departmentActionItemList = actionItemReportServiceImpl.getActionItemsByPriority(priority);
-			log.info("getMeetingsByDepartment executed successfully");
+			log.info("getActionItemsReportByPriority() executed successfully");
 			return new ResponseEntity<>(departmentActionItemList, HttpStatus.OK);
 		}catch (EmptyListException businessException) {
+			log.error("getActionItemsReportByPriority() is exied with exception"+ businessException.getMessage(),businessException);
 			throw businessException;
 		}
 		catch(Exception e) {
-			log.error("An exception occured while fetching the action Items based on priority"+ e.getMessage());
+			log.error("An exception occured while fetching the action Items based on priority"+ e.getMessage(), e);
 			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_CODE,
 				     ErrorCodeMessages.ERR_REPORT_GET_ACTIONITEMS_UNSUCCESS_MSG);
 			
@@ -118,7 +121,7 @@ public class ActionItemReportController {
 			return new ResponseEntity<>(DeptActionItemsCount, HttpStatus.OK);
 			
 		}catch (Exception e) {
-			log.error("getAllDepartmentsactionItemsCount() is exied with exception"+ e.getMessage());
+			log.error("getAllDepartmentsactionItemsCount() is exied with exception"+ e.getMessage(), e);
 			throw new ControllerException(ErrorCodeMessages.ERR_REPORT_DRPARTMENT_COUNT_IS_NULL_CODE,
 					ErrorCodeMessages.ERR_REPORT_DRPARTMENT_COUNT_IS_NULL_MSG);
 		}
