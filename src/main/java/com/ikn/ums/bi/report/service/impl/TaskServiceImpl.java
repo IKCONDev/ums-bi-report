@@ -69,7 +69,7 @@ public class TaskServiceImpl implements TaskService{
 					ErrorCodeMessages.ERR_REPORT_TASKOWNER_IS_NULL_MSG);
 		}
 		log.info("getTasksListByOwner() is under execution...");
-		ResponseEntity<List<Task>> response = restTemplate.exchange(this.meetingMicroserviceTaskControllerURL+"/assigned/"+taskOwner, 
+		ResponseEntity<List<Task>> response = restTemplate.exchange(this.meetingMicroserviceTaskControllerURL+"/task-organized/"+taskOwner, 
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<Task>>() {
 				});
 		List<Task> taskListByOwner = response.getBody();
