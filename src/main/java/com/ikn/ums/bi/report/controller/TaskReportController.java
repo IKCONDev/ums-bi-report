@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/taskReports")
-public class TaskController {
+public class TaskReportController {
 	
 	@Autowired
 	private TaskService reportService;

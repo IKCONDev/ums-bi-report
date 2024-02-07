@@ -110,8 +110,8 @@ public class ActionItemReportController {
 		
 	}	
     
-	@GetMapping("/department-actions")
-	public ResponseEntity<List<Object[]>> getAllDepartmentsactionItemsCount(){
+	@GetMapping("/department/count")
+	public ResponseEntity<List<Object[]>> getActionItemsCountReportOfAllDepartments(){
 		log.info("getAllDepartmentsMeetingsCount() is entered");
 		try {
 			log.info("getAllDepartmentsMeetingsCount() is under execution...");

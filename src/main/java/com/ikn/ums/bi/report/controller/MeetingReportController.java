@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/reports")
-public class MeetingController {
+public class MeetingReportController {
 	
 	@Autowired
 	private MeetingService reportService;
