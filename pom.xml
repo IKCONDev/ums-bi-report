@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ikn.ums.bi.report</groupId>
 	<artifactId>ums-bi-report</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>ALPHA-0.1</version>
 	<name>ums-bi-report</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
