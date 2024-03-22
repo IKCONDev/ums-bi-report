@@ -170,7 +170,7 @@ public class TaskReportController {
 	 * @return
 	 */
 	@GetMapping("/tasks/aged")
-	public ResponseEntity<List<Task>> getAgedTasksList(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+	public ResponseEntity<List<Task>> getAgedTasksList(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
 		log.info("getAgedTasksList() is entered with args: date - "+ date );
 		if(date == null) {
 			log.info("getAgedTasksList() EmptyInputException "+ date);

@@ -29,7 +29,7 @@ public class TaskServiceImpl implements TaskService{
 	private String meetingMicroserviceTaskControllerURL = "http://UMS-MEETING-SERVICE/task";
     
 	@Override
-	public List<Task> getAgedTasksList(LocalDate date) {
+	public List<Task> getAgedTasksList(LocalDateTime date) {
 		log.info("getAgedTasksList() is entered");
 		if(date == null) {
 			log.info("getAgedTasksList() EmptyInputException "+ date);

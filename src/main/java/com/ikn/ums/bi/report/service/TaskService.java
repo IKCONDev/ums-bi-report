@@ -11,7 +11,7 @@ import com.ikn.ums.bi.report.model.Task;
 
 public interface TaskService {
 
-	public List<Task> getAgedTasksList(LocalDate date);
+	public List<Task> getAgedTasksList(LocalDateTime date);
 	
 	public List<Task> getTasksListByStatus(String taskStatus);
 	
